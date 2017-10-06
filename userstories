@@ -1,0 +1,72 @@
+### DEFINITIONS ###
+There are 2 entities in the system:
+	- a user
+	- a parking place
+	- the user queue
+
+Shortcuts:
+	- the user queue = the queue
+	- a parking place = a place
+		- an exclusive (parking) place = a parking place that is assigned to a host user but is never shared
+		- a shared (parking) place = a parking place that is assigned to a host user and changed it status to free at least once
+		- a free (shared parking) place = a shared parking place that has a free status for a moment
+		- a booked (shared parking) place = a shared parking place that is booked by a user for a moment 
+	- the system information = number of users, number of shared places, number of free shared places, number of users in the queue
+
+There are 3 user roles in the system:
+	- administrator (admin)
+	- parking place owner (host)
+	- shared parking place renter (driver)
+
+### NOTIFICATIONS ###
+As an administrator I should be notified
+	if a user registers in the system
+	if a host starts to share his parking place
+	if a host works from home
+	if a driver rents a place
+	if a parking place changes status from free to booked and vise versa  
+	  
+As a host I should be notified
+	if a driver rents my place
+	if a renter cancels my place booking
+	if an administator send a notification to every user
+
+As a driver I should be notified
+	if a free parking place appears (if I am in the user queue)
+
+
+### ACTIONS ###
+As an administrator I am able to
+	get information on the system status 
+	read a user information
+	edit a user information
+	remove a user from the system
+	add a place to the system
+	edit a place information
+	remove a place from the system
+	export the system state (users, places) to cvs file
+	import the system state from cvs file	
+
+As a host I am able to
+	get information on the system status 
+	get contact information of any user in the system
+	edit my information
+	change my parking place status to free and vise versa
+	add out of office dates in advance
+	remove my information from the system
+
+As a driver I am able to
+	get information on the system status
+	get contact information on any user in the system
+	edit my information
+	rent any parking place with free status
+	cancel booking of a renter parking place
+	remove my information from the system
+
+### THE USER QUEUE ###
+The user queue 
+	is empty when the system is initialized
+	cleans up on every midnight
+	pushes a user if it sends a booking request but no parking place was free
+	sends notification to a user in it if a parking place turns free
+	pops a user of it rents a parking place
